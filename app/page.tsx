@@ -7,6 +7,7 @@ import {
 } from "../utils/constants";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button/";
+import { submitConsultationData } from "@/utils/data";
 
 type QuestionAnswers = "Yes" | "No";
 type AnswersList = { [key: string]: QuestionAnswers };
@@ -45,9 +46,13 @@ export default function Consultation() {
   };
 
   const handleSubmitConsultation = () => {
+    // Submit data to our "API"
+    submitConsultationData(answers);
+
     // Reset local storage once submitted
     localStorage.setItem("answers", JSON.stringify({}));
 
+    // Reroute to the "Thank you" page
     router.push("/ty");
   };
 
