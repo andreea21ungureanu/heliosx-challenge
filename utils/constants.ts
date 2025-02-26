@@ -6,4 +6,4 @@ export const PEAR_ALLERGY_QUESTIONS = [
   "Have you ever been diagnosed with a latex or birch pollen allergy, which can be linked to pear allergies?",
 ];
 
-export const QUESTIONS_ANSWERS_OPTIONS = { Yes: "Yes", No: "No" };
+export const QUESTIONS_ANSWERS_OPTIONS = { Yes: "Yes", No: "No" } as const;
