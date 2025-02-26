@@ -1,15 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   PEAR_ALLERGY_QUESTIONS,
   QUESTIONS_ANSWERS_OPTIONS,
 } from "../utils/constants";
 
+type QuestionAnswers = "Yes" | "No";
+type AnswersList = { [key: string]: QuestionAnswers };
+
 export default function Consultation() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState(() => {
+    const storedAnswers = localStorage.getItem("answers");
+    return storedAnswers ? JSON.parse(storedAnswers) : {};
+  });
 
-  const handleAnswer = (answer: "Yes" | "No") => {
+  // Update local storage with given answers as the user progresses through the questionnaire
+  useEffect(() => {
+    localStorage.setItem("answers", JSON.stringify(answers));
+  }, [answers]);
+
+  const handleAnswer = (answer: QuestionAnswers) => {
+    setAnswers((prev: AnswersList) => ({
+      ...prev,
+      [PEAR_ALLERGY_QUESTIONS[currentQuestion]]: answer,
+    }));
+
     if (currentQuestion < PEAR_ALLERGY_QUESTIONS.length) {
       setCurrentQuestion(currentQuestion + 1);
     }
