@@ -2,35 +2,68 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Run the tests with:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm test
+```
 
-## Learn More
+Currently there is one test in place for the Button component.
 
-To learn more about Next.js, take a look at the following resources:
+## Technical details
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The project's goal is to ask a user a set of 5 questions that would determine if they are allergic to Genovian Pears.
+The project is structured like a consultation, following similar patterns to the ones used by HeliosX's products.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### How it works
 
-## Deploy on Vercel
+1. Consultation page
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Navigating to [http://localhost:3000](http://localhost:3000) starts the Consultation flow via a button
+- Once the consultation is started, a set of 5 question is displayed, one by one, that identify the user's allergy. Once a question has been answered, this remains visible on the screen.
+- Once all the questions are answered, a submission button is displayed which redirects the user to the "Thank you" page and submits the data (console.log the data, our fake API).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. "Thank you" page
+
+- Once the consultation is completed, the user is redirected to this page. No further action can be taken
+- Going back using the browser button starts a new consultation
+
+### Components
+
+As the app is fairly small, a lot of the logic is contained inside the page.
+
+- A Button component was created as it was used for both starting and submitting the consultation
+- We use the main layout to define the header and footer of the application
+
+### Data handling
+
+As there is no API, the data is currently sent to a function which console.logs the information on the screen
+
+### Mobile clients
+
+The app is mobile client friendly because:
+
+- The header image adjusts for smaller screens
+- The footer is compacted into two rows
+- During the consutation, the screen automatically scrolls to the most recent question via refs
+
+### Testing
+
+The Button component is tested using React Testing Library and Jest.
+
+### Accessibility
+
+- The button to start the consultation, the consultation form and the submission button can be tabbed into.
+
+### Further steps
+
+1. Instead of console.logging the data, we would ideally use an API and post the information to a database
+2. TBD
