@@ -66,7 +66,7 @@ The Button component is tested using React Testing Library and Jest.
 
 ### Accessibility
 
-- The button to start the consultation, the consultation form and the submission button can be tabbed into.
+The button to start the consultation, the consultation form and the submission button can be tabbed into.
 
 ### Further steps
 
