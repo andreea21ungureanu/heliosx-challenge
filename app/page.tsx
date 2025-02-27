@@ -73,7 +73,9 @@ export default function Consultation() {
           return (
             <div
               key={question}
-              ref={(el) => (questionRefs.current[index] = el)}
+              ref={(el) => {
+                questionRefs.current[index] = el;
+              }}
               className="text-center mb-6 max-w-md"
             >
               <h2 className="text-xl font-semibold mb-4">{question}</h2>
